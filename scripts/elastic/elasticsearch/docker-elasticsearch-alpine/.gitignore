@@ -1,0 +1,6 @@
+build
+*.tgz
+*.bu
+
+.vagrant/
+.vscode/settings.json

@@ -1,0 +1,30 @@
+version: '3'
+services:
+     web:
+       image: alpine3.8:all
+       hostname: alpine3.8
+       labels:
+            - traefik.http.routers.web.rule=Host(`magento.pavanj.com`)
+            - traefik.http.routers.web.tls=true
+            - traefik.http.routers.web.tls.certresolver=le
+            - traefik.http.services.web.loadbalancer.server.port=80
+
+            - traefik.http.routers.es.rule=Host(`elastic.pavanj.com`)
+            - traefik.http.routers.es.tls=true
+            - traefik.http.routers.es.tls.certresolver=le
+            - traefik.http.routers.es-svc=es-svc
+            - traefik.http.services.es-svc.loadbalancer.server.port=9200
+              #- traefik.http.routers.rmq.rule=Host(`rmq.pavanj.com`)
+              # - traefik.http.routers.rmq.tls=true
+              #   - traefik.http.routers.rmq.entrypoints=web
+              #       - traefik.http.routers.rmq.tls.certresolver=le
+              #       - traefik.http.routers.rmq-svc=rmq-svc
+              #                - traefik.http.services.rmq-svc.loadbalancer.server.port=15672
+       restart: always
+       container_name: parkingzone
+       tty: true
+       networks:
+            - web    
+networks:
+   web:
+     external: true

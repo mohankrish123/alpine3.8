@@ -1,0 +1,5 @@
+[mysqld]
+user = root
+datadir = /var/lib/mysql
+port = 3306
+innodb_strict_mode = 0

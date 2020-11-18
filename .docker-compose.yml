@@ -1,0 +1,22 @@
+version: '3'
+services:
+     alpine:
+       image: alpine:phase1
+       hostname: pk.alpine.com
+       labels:
+            - traefik.http.routers.alpine.rule=Host(`pk.alpine.com`)
+            - traefik.http.routers.alpine.tls=true
+            - traefik.http.routers.alpine.tls.certresolver=le
+            - traefik.http.services.local.loadbalancer.server.port=80
+       restart: always
+       expose: 
+            - "80"
+       container_name: "alpine-local"
+       tty: true
+       volumes:
+            - /sys/fs/cgroup:/
+       networks:
+            - web    
+networks:
+   web:
+     external: true

@@ -1,0 +1,23 @@
+version: '3'
+services:
+     web:
+       image: alpine3.8:all
+       hostname: alpine3.8
+       restart: always
+       container_name: alpine3.8
+       tty: true
+       ports:
+         - "9001:80"
+         - "9002:9200"
+         - "9003:15672"
+       volumes:
+         - /home/pavanj/nexces_backups/Peacefulvalleyfurniture/html:/var/www/html
+           #       networks:
+           #           pavan:
+           #               ipv4_address: 172.19.0.2
+               #networks:
+               #   pavan#:
+               #       ipam:
+               #           driver: bridge
+               #           config:
+               #               - subnet: 172.19.0.0/16      
